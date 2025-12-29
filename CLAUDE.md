@@ -61,10 +61,10 @@ Both variables are **required** and validated by `Config` class at startup.
 
 **ai.py** - OpenAI integration
 - `AIAssistant` wraps OpenAI client
-- Contains 40-line `system_prompt` defining bot's Cuban revolutionary persona
+- Contains system prompt defining bot's Cuban revolutionary persona with brevity emphasis (1-3 sentences max)
 - `get_response()` sends messages to GPT-4o-mini with:
   - Model: `gpt-4o-mini`
-  - Max tokens: 500
+  - Max tokens: 150 (reduced for concise responses)
   - Temperature: 0.8 (for creative responses)
   - Optional conversation context support (not currently used)
 
