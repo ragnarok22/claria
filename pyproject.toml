@@ -8,3 +8,8 @@ dependencies = [
     "openai>=2.14.0",
     "python-telegram-bot>=22.5",
 ]
+
+[dependency-groups]
+dev = [
+    "python-dotenv>=1.2.1",
+]

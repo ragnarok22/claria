@@ -1,5 +1,12 @@
 import os
 
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
+
 
 def get_env(value: str, default: str = "", required: bool = False) -> str:
     """
