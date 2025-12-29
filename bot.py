@@ -73,7 +73,7 @@ class ClarIABot:
         chat_type = update.effective_chat.type
 
         if chat_type not in ["group", "supergroup"]:
-            logger.info(f"Private message received, sending group-only warning")
+            logger.info("Private message received, sending group-only warning")
             await update.message.reply_text(
                 "¡Oye compañero! Este bot solo funciona en grupos. "
                 "Agrégame a un grupo y mencióneme para que podamos hablar."
