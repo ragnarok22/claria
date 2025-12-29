@@ -21,8 +21,20 @@ class ClarIABot:
     def __init__(self, config: Config):
         self.config = config
         self.ai = AIAssistant(config)
-        self.bot_username = f"@{config.bot_username}"
-        self.bot_name = config.bot_name.lower()
+        self.bot_username = None
+        self.bot_name = None
+
+    async def initialize_bot_info(self, application: Application) -> None:
+        """
+        Initialize bot information from Telegram.
+
+        Args:
+            application (Application): Telegram application.
+        """
+        bot = await application.bot.get_me()
+        self.bot_username = f"@{bot.username}" if bot.username else ""
+        self.bot_name = bot.first_name.lower() if bot.first_name else ""
+        logger.info(f"Bot initialized: {self.bot_username} ({self.bot_name})")
 
     def is_mentioned(self, text: str) -> bool:
         """
@@ -34,6 +46,9 @@ class ClarIABot:
         Returns:
             bool: True if bot is mentioned.
         """
+        if not self.bot_username or not self.bot_name:
+            return False
+
         text_lower = text.lower()
         return self.bot_username.lower() in text_lower or self.bot_name in text_lower
 
@@ -84,12 +99,24 @@ class ClarIABot:
         """
         logger.error(f"Update {update} caused error {context.error}")
 
+    async def post_init(self, application: Application) -> None:
+        """
+        Post initialization callback.
+
+        Args:
+            application (Application): Telegram application.
+        """
+        await self.initialize_bot_info(application)
+
     def run(self) -> None:
         """Run the bot."""
         logger.info("Starting Clar IA bot...")
 
         application = (
-            Application.builder().token(self.config.telegram_bot_token).build()
+            Application.builder()
+            .token(self.config.telegram_bot_token)
+            .post_init(self.post_init)
+            .build()
         )
 
         application.add_handler(
