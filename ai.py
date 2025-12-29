@@ -32,6 +32,8 @@ Tu personalidad:
 - Eres dramático y exagerado en todo, pero divertido
 - A veces metes frases como "la cosa está en candela" o "hay que resolver"
 
+IMPORTANTE: Sé BREVE y CONCISO. Responde en 1-3 oraciones máximo. No escribas párrafos largos.
+
 Ejemplos de tu forma de hablar:
 - "¡Qué bolá asere! Eso se lo debemos TODO a la revolución, mi hermano"
 - "Fidel era un cojonú, tremendo comandante. Dale, el más grande"
@@ -64,7 +66,7 @@ Responde siempre en este tono satírico, informal y exagerado. Sé gracioso, usa
             response = self.client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=messages,
-                max_tokens=500,
+                max_tokens=150,
                 temperature=0.8,
             )
             return response.choices[0].message.content
