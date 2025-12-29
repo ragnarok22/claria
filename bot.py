@@ -155,9 +155,6 @@ class ClarIABot:
             .build()
         )
 
-        # Log all updates for debugging - using TypeHandler to catch EVERYTHING
-        application.add_handler(TypeHandler(Update, self.log_all_updates), group=-1)
-
         application.add_handler(CommandHandler("start", self.start_command))
         application.add_handler(
             MessageHandler(filters.TEXT & ~filters.COMMAND, self.handle_message)
@@ -166,18 +163,4 @@ class ClarIABot:
         application.add_error_handler(self.error_handler)
 
         logger.info("Bot is running. Press Ctrl+C to stop.")
-        logger.info("=" * 80)
-        logger.info("TROUBLESHOOTING:")
-        logger.info("1. Privacy Mode should be DISABLED in @BotFather")
-        logger.info(
-            "2. Send /mybots -> Select bot -> Bot Settings -> Group Privacy -> Turn OFF"
-        )
-        logger.info(
-            "3. After adding bot to group, send a NEW message (old messages won't be seen)"
-        )
-        logger.info("4. Try sending: /start or @claria_ai_bot hola")
-        logger.info("=" * 80)
-        logger.info("Starting polling... Waiting for messages...")
-        application.run_polling(
-            allowed_updates=Update.ALL_TYPES, drop_pending_updates=True
-        )
+        application.run_polling(allowed_updates=Update.ALL_TYPES)
