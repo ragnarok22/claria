@@ -10,6 +10,7 @@
 
 - **Solo grupos**: El bot únicamente responde en grupos y supergrupos de Telegram
 - **Detección de menciones**: Responde cuando es mencionado por su nombre de usuario (@bot_username), nombre, o cuando alguien responde a sus mensajes
+- **Contexto conversacional**: Cuando respondes a un mensaje, incluye el contexto del mensaje original para respuestas más coherentes
 - **Personalidad cubana**: Responde en español con expresiones cubanas y apoyando la revolución
 - **Impulsado por IA**: Usa OpenAI GPT-4o-mini para generar respuestas contextuales
 

@@ -94,9 +94,32 @@ class ClarIABot:
 
         logger.info(f"Processing message: {message_text}")
 
+        # Build conversation context if this is a reply to another message
+        conversation_context = None
+        if update.message.reply_to_message and update.message.reply_to_message.text:
+            replied_msg = update.message.reply_to_message
+            replied_username = (
+                replied_msg.from_user.first_name if replied_msg.from_user else "Usuario"
+            )
+
+            # Determine the role based on who sent the replied message
+            if replied_msg.from_user and replied_msg.from_user.id == self.bot_id:
+                # If replying to bot's message, bot was assistant
+                conversation_context = [
+                    {"role": "assistant", "content": replied_msg.text},
+                ]
+            else:
+                # If replying to another user's message, include it as context
+                conversation_context = [
+                    {
+                        "role": "user",
+                        "content": f"{replied_username}: {replied_msg.text}",
+                    },
+                ]
+
         try:
             await update.message.chat.send_action(action="typing")
-            response = await self.ai.get_response(message_text)
+            response = await self.ai.get_response(message_text, conversation_context)
             await update.message.reply_text(response)
             logger.info("Response sent successfully")
         except Exception as e:
