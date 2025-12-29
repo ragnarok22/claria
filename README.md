@@ -1,6 +1,10 @@
-# Clar IA - Bot de Telegram
+<div align="center">
+  <img src="claria-logo.png" alt="Clar IA Logo">
 
-Bot de Telegram que responde en español como un apasionado defensor del régimen cubano, impulsado por OpenAI.
+  # Clar IA - Bot de Telegram
+
+  Bot de Telegram que responde en español como un apasionado defensor del régimen cubano, impulsado por OpenAI.
+</div>
 
 ## Características
 
