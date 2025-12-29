@@ -1,0 +1,10 @@
+services:
+  clar-ia-bot:
+    build: .
+    container_name: clar-ia-bot
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}

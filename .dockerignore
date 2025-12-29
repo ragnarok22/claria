@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+.venv
+venv
+
+# Environment
+.env
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Cache
+.ruff_cache
+.pytest_cache
+
+# Documentation
+README.md
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Makefile
+Makefile
