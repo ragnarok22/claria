@@ -67,7 +67,11 @@ class ClarIABot:
 
         chat_type = update.effective_chat.type
         if chat_type not in ["group", "supergroup"]:
-            logger.info(f"Ignoring message from {chat_type} chat")
+            logger.info(f"Received message from {chat_type} chat")
+            await update.message.reply_text(
+                "¡Oye compañero! Este bot solo funciona en grupos. "
+                "Agrégame a un grupo y mencióneme para que podamos hablar."
+            )
             return
 
         message_text = update.message.text
@@ -78,6 +82,7 @@ class ClarIABot:
         logger.info(f"Processing message: {message_text}")
 
         try:
+            await update.message.chat.send_action(action="typing")
             response = await self.ai.get_response(message_text)
             await update.message.reply_text(response)
             logger.info(f"Sent response: {response}")
