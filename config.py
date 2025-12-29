@@ -27,5 +27,7 @@ class Config:
     """
 
     def __init__(self):
-        self.token = get_env("TOKEN", required=True)
+        self.telegram_bot_token = get_env("TELEGRAM_BOT_TOKEN", required=True)
         self.openai_api_key = get_env("OPENAI_API_KEY", required=True)
+        self.bot_username = get_env("BOT_USERNAME", default="clar_ia_bot")
+        self.bot_name = get_env("BOT_NAME", default="Clar IA")
