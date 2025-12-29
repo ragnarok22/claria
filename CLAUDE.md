@@ -8,7 +8,7 @@ Clar IA is a Spanish-language Telegram bot that responds with a comedic, exagger
 
 **Key behavior:**
 - Only responds in Telegram groups/supergroups (not private chats)
-- Only responds when mentioned by username or name
+- Responds when mentioned by username/name OR when someone replies to its messages
 - Uses async/await pattern throughout
 
 ## Common Commands
@@ -53,9 +53,9 @@ Both variables are **required** and validated by `Config` class at startup.
 
 **bot.py** - Main Telegram bot logic
 - `ClarIABot` class manages bot lifecycle
-- `initialize_bot_info()` fetches bot username/name from Telegram on startup
+- `initialize_bot_info()` fetches bot username/name/ID from Telegram on startup
 - `is_mentioned()` checks if message contains bot's username or name
-- `handle_message()` validates group chat + mention, then gets AI response
+- `handle_message()` validates group chat + (mention OR reply to bot), then gets AI response
 - Uses `application.run_polling()` for long-polling updates
 - All handlers are async functions
 
@@ -80,7 +80,7 @@ Both variables are **required** and validated by `Config` class at startup.
 ### Message Flow
 1. Telegram sends update via polling
 2. `MessageHandler` (filters.TEXT) triggers `handle_message()`
-3. Validate: is group chat? is bot mentioned?
+3. Validate: is group chat? is bot mentioned OR is reply to bot message?
 4. Send typing action
 5. Call `AIAssistant.get_response()` with message text
 6. Reply to message with AI response

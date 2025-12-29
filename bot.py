@@ -24,6 +24,7 @@ class ClarIABot:
         self.ai = AIAssistant(config)
         self.bot_username = None
         self.bot_name = None
+        self.bot_id = None
 
     async def initialize_bot_info(self, application: Application) -> None:
         """
@@ -35,7 +36,10 @@ class ClarIABot:
         bot = await application.bot.get_me()
         self.bot_username = f"@{bot.username}" if bot.username else ""
         self.bot_name = bot.first_name.lower() if bot.first_name else ""
-        logger.info(f"Bot initialized: {self.bot_username} ({self.bot_name})")
+        self.bot_id = bot.id
+        logger.info(
+            f"Bot initialized: {self.bot_username} ({self.bot_name}) ID: {self.bot_id}"
+        )
 
     def is_mentioned(self, text: str) -> bool:
         """
@@ -78,7 +82,14 @@ class ClarIABot:
 
         message_text = update.message.text
 
-        if not self.is_mentioned(message_text):
+        # Check if bot is mentioned or if message is a reply to bot
+        is_reply_to_bot = (
+            update.message.reply_to_message
+            and update.message.reply_to_message.from_user
+            and update.message.reply_to_message.from_user.id == self.bot_id
+        )
+
+        if not self.is_mentioned(message_text) and not is_reply_to_bot:
             return
 
         logger.info(f"Processing message: {message_text}")

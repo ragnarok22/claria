@@ -9,7 +9,7 @@
 ## Características
 
 - **Solo grupos**: El bot únicamente responde en grupos y supergrupos de Telegram
-- **Detección de menciones**: Responde cuando es mencionado por su nombre de usuario (@bot_username) o nombre
+- **Detección de menciones**: Responde cuando es mencionado por su nombre de usuario (@bot_username), nombre, o cuando alguien responde a sus mensajes
 - **Personalidad cubana**: Responde en español con expresiones cubanas y apoyando la revolución
 - **Impulsado por IA**: Usa OpenAI GPT-4o-mini para generar respuestas contextuales
 
@@ -122,8 +122,8 @@ clar-ia/
 
 El bot:
 - Solo responde en grupos/supergrupos (ignora mensajes privados)
-- Solo responde cuando es mencionado por su username o nombre
-- Responde en español cubano con expresiones típicas
+- Responde cuando es mencionado por su username/nombre o cuando alguien responde a sus mensajes
+- Responde en español cubano con expresiones típicas de forma breve (1-3 oraciones)
 - Defiende la revolución cubana y sus logros
 - Critica el embargo estadounidense
 - Menciona figuras históricas como Fidel Castro y el Che Guevara
