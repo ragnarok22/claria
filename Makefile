@@ -1,7 +1,7 @@
 .PHONY: help install run test lint format clean docker-build docker-run docker-stop docker-logs compose-up compose-down compose-logs
 
-IMAGE_NAME = clar-ia
-CONTAINER_NAME = clar-ia-bot
+IMAGE_NAME = claria
+CONTAINER_NAME = claria-bot
 
 help:
 	@echo "Available commands:"
