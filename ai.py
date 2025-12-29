@@ -1,5 +1,8 @@
+import logging
 from openai import OpenAI
 from config import Config
+
+logger = logging.getLogger(__name__)
 
 
 class AIAssistant:
@@ -50,20 +53,28 @@ Responde siempre en este tono satírico, informal y exagerado. Sé gracioso, usa
         Returns:
             str: AI response.
         """
+        logger.info(f"AI: Building messages for OpenAI with message: {message[:100]}")
         messages = [{"role": "system", "content": self.system_prompt}]
 
         if context:
+            logger.info(f"AI: Adding {len(context)} context messages")
             messages.extend(context)
 
         messages.append({"role": "user", "content": message})
+        logger.info(f"AI: Total messages to send: {len(messages)}")
 
         try:
+            logger.info("AI: Calling OpenAI API...")
             response = self.client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=messages,
                 max_tokens=500,
                 temperature=0.8,
             )
-            return response.choices[0].message.content
+            logger.info("AI: OpenAI API call successful")
+            ai_response = response.choices[0].message.content
+            logger.info(f"AI: Response content: {ai_response[:100]}...")
+            return ai_response
         except Exception as e:
+            logger.error(f"AI: Error calling OpenAI API: {e}", exc_info=True)
             return f"Error al procesar la solicitud: {str(e)}"
